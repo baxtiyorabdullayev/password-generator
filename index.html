@@ -8,6 +8,28 @@
     <title>Password generator</title>
   </head>
   <body>
-    <script src="./main.js"></script>
+    <div class="bigBox">
+      <div class="passwordOut">Your Password!!!</div>
+      <form>
+        <div>
+          <input type="checkbox" id="lowCases" />
+          <label for="lowCases">low cases (abcdefghijklm)</label>
+        </div>
+        <div>
+          <input type="checkbox" id="upperCases" />
+          <label for="upperCases">UPPER CASES (ABCDEFGHIJKLM )</label>
+        </div>
+        <div>
+          <input type="checkbox" id="numbers" />
+          <label for="numbers">numbers (0123456789)</label>
+        </div>
+        <div>
+          <input type="checkbox" id="symbols" />
+          <label for="symbols">symbols (!@#$%^&_-)</label>
+        </div>
+        <button class="generateButton">Generate</button>
+      </form>
+    </div>
+    <!-- <script src="./main.js"></script> -->
   </body>
 </html>

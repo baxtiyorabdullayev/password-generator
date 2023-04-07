@@ -2,9 +2,28 @@
 
 let body = document.querySelector("body");
 
-// elementName, tagName, elementClass, text
-let box = elementCreator("box", "div", "bigBox", "This is container");
-let btn = elementCreator("btn", "button", "clickButton", "click me");
+// elementName, tagName, elementID, text
+// container
+let box = elementCreator("box", "div", "bigBox");
+let passwordOut = elementCreator("passwordOut", "div", "outBox");
+
+// low cases checkbox
+let lowCases = elementCreator("lowCases", "input", "lowCases", "");
+lowCases.type = "checkbox";
+let lowLabel = elementCreator("lowLabel", "label", "label", "Low Cases");
+lowLabel.for = "lowCases";
+
+// upper cases checkbox
+let upperCases = elementCreator("upperCases", "input", "upperCases");
+upperCases.type = "checkbox";
+
+lowCases.addEventListener("change", lowFn);
+upperCases.addEventListener("change", upperFn);
+
+appendChilder(box, lowCases);
+appendChilder(box, lowLabel);
+appendChilder(box, upperCases);
+appendChilder(body, box);
 
 // function generatePassword() {
 //   var length = 8,
@@ -22,7 +41,7 @@ let btn = elementCreator("btn", "button", "clickButton", "click me");
 // HTML element creator function
 function elementCreator(elementName, tagName, elementClass, text) {
   let foo = (elementName = document.createElement(tagName));
-  elementName.className = elementClass;
+  elementName.id = elementClass;
   elementName.textContent = text;
   return foo;
 }
@@ -30,4 +49,22 @@ function elementCreator(elementName, tagName, elementClass, text) {
 // append childer to html
 function appendChilder(father, child) {
   return father.appendChild(child);
+}
+
+//adding low cases
+function lowFn() {
+  if (this.checked) {
+    lowCases.value = "abcdefghijklmnopqrstuvwxyz";
+  } else {
+    lowCases.value = null;
+  }
+}
+
+//adding upper cases
+function upperFn() {
+  if (this.checked) {
+    upperCases.value = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  } else {
+    upperCases.value = null;
+  }
 }
