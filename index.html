@@ -12,6 +12,10 @@
       <div class="passwordOut">Your Password!!!</div>
       <form>
         <div>
+          <input type="number" id="passwordLength" />
+          <span>Password Length</span>
+        </div>
+        <div>
           <input type="checkbox" id="lowCases" />
           <label for="lowCases">low cases (abcdefghijklm)</label>
         </div>
@@ -27,9 +31,9 @@
           <input type="checkbox" id="symbols" />
           <label for="symbols">symbols (!@#$%^&_-)</label>
         </div>
-        <button class="generateButton">Generate</button>
+        <button id="generateButton">Generate</button>
       </form>
     </div>
-    <!-- <script src="./main.js"></script> -->
+    <script src="./main.js"></script>
   </body>
 </html>

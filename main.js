@@ -1,54 +1,53 @@
 "use strict";
 
-let body = document.querySelector("body");
+let passwordOut = query(".passwordOut");
 
-// elementName, tagName, elementID, text
-// container
-let box = elementCreator("box", "div", "bigBox");
-let passwordOut = elementCreator("passwordOut", "div", "outBox");
+let passwordLength = query("#passwordLength");
 
-// low cases checkbox
-let lowCases = elementCreator("lowCases", "input", "lowCases", "");
-lowCases.type = "checkbox";
-let lowLabel = elementCreator("lowLabel", "label", "label", "Low Cases");
-lowLabel.for = "lowCases";
-
-// upper cases checkbox
-let upperCases = elementCreator("upperCases", "input", "upperCases");
-upperCases.type = "checkbox";
-
+let lowCases = query("#lowCases");
+lowCases.value = "";
 lowCases.addEventListener("change", lowFn);
+
+let upperCases = query("#upperCases");
+upperCases.value = "";
 upperCases.addEventListener("change", upperFn);
 
-appendChilder(box, lowCases);
-appendChilder(box, lowLabel);
-appendChilder(box, upperCases);
-appendChilder(body, box);
+let numbers = query("#numbers");
+numbers.value = "";
+numbers.addEventListener("change", numberFn);
 
-// function generatePassword() {
-//   var length = 8,
-//     charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-//     retVal = "";
-//   for (var i = 0, n = charset.length; i < length; ++i) {
-//     retVal += charset.charAt(Math.floor(Math.random() * n));
-//   }
-//   return retVal;
-// }
-// console.log(generatePassword());
+let symbols = query("#symbols");
+symbols.value = "";
+symbols.addEventListener("change", symbolsFn);
+
+let generateBtn = query("#generateButton");
+generateBtn.addEventListener("click", generatePassword);
+
+function generatePassword(e) {
+  e.preventDefault();
+  let password = "";
+  if (passwordLength.value) {
+    if (lowCases.value || upperCases.value || numbers.value || symbols.value) {
+      let charset =
+        lowCases.value + upperCases.value + numbers.value + symbols.value;
+      for (let i = 0, n = charset.length; i < passwordLength.value; i++) {
+        password += charset.charAt(Math.floor(Math.random() * n));
+      }
+    } else {
+      return (passwordOut.textContent = "Please choose one!");
+    }
+  } else {
+    return (passwordOut.textContent = "Please enter passaword length");
+  }
+
+  return (passwordOut.textContent = password);
+}
 
 // helper functions **********************************************
 
-// HTML element creator function
-function elementCreator(elementName, tagName, elementClass, text) {
-  let foo = (elementName = document.createElement(tagName));
-  elementName.id = elementClass;
-  elementName.textContent = text;
-  return foo;
-}
-
-// append childer to html
-function appendChilder(father, child) {
-  return father.appendChild(child);
+// query selector
+function query(id) {
+  return document.querySelector(id);
 }
 
 //adding low cases
@@ -56,7 +55,7 @@ function lowFn() {
   if (this.checked) {
     lowCases.value = "abcdefghijklmnopqrstuvwxyz";
   } else {
-    lowCases.value = null;
+    lowCases.value = "";
   }
 }
 
@@ -65,6 +64,24 @@ function upperFn() {
   if (this.checked) {
     upperCases.value = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   } else {
-    upperCases.value = null;
+    upperCases.value = "";
+  }
+}
+
+//adding numbers
+function numberFn() {
+  if (this.checked) {
+    numbers.value = "0123456789";
+  } else {
+    numbers.value = "";
+  }
+}
+
+//adding symbols
+function symbolsFn() {
+  if (this.checked) {
+    symbols.value = " ~`! @#$%^&*()_-+={[}]|:;'<,>.?/";
+  } else {
+    symbols.value = "";
   }
 }
