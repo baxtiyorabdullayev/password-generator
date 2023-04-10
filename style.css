@@ -24,6 +24,12 @@ body {
   border-radius: 5px;
 }
 
+.copy {
+  width: 22px;
+  cursor: pointer;
+  float: right;
+}
+
 #passwordLength {
   /* border: none; */
   outline: none;

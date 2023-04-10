@@ -2,6 +2,9 @@
 
 let passwordOut = query(".passwordOut");
 
+let copyBtn = query(".copy");
+copyBtn.addEventListener("click", copyToClipboard);
+
 let passwordLength = query("#passwordLength");
 
 let lowCases = query("#lowCases");
@@ -48,6 +51,14 @@ function generatePassword(e) {
 // query selector
 function query(id) {
   return document.querySelector(id);
+}
+
+// copying to clipboard
+function copyToClipboard() {
+  //passwordOut.select();
+  // passwordOut.setSelectionRange(0, 99999); // For mobile devices
+  // // Copy the text inside the text field
+  // navigator.clipboard.writeText(passwordOut.value);
 }
 
 //adding low cases
